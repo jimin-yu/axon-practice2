@@ -1,0 +1,7 @@
+### 채팅방 생성
+POST {{host}}/v1/rooms
+Content-Type: application/json
+
+{
+  "name": "sydney"
+}
