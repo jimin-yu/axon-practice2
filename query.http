@@ -1,0 +1,2 @@
+### 채팅방 summary 조회
+GET {{query-app}}/v1/rooms

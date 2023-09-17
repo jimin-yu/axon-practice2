@@ -1,5 +1,5 @@
 ### 채팅방 생성
-POST {{host}}/v1/rooms
+POST {{command-app}}/v1/rooms
 Content-Type: application/json
 
 {
