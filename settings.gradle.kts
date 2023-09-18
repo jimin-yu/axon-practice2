@@ -1,2 +1,2 @@
 rootProject.name = "esdemo3"
-include("command", "query", "common")
+include("command", "query", "query2", "common")

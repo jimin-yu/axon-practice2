@@ -4,11 +4,13 @@ import com.example.events.RoomCreatedEvent
 import com.example.query.entity.RoomSummary
 import com.example.query.queries.AllRoomsQuery
 import com.example.query.repository.RoomSummaryRepository
+import org.axonframework.config.ProcessingGroup
 import org.axonframework.eventhandling.EventHandler
 import org.axonframework.queryhandling.QueryHandler
 import org.springframework.stereotype.Component
 
 @Component
+@ProcessingGroup("group1")
 class RoomSummaryProjection(private val repository: RoomSummaryRepository) {
 
     @EventHandler

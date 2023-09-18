@@ -1,7 +1,39 @@
 ### 채팅방 생성
 POST {{command-app}}/v1/rooms
+Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "sydney"
+  "name": "spain"
+}
+
+### 채팅방 join
+
+POST {{command-app}}/v1/rooms/3cda0287-42b3-4088-bb52-b482d0efb711/participants
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Steven"
+}
+
+### 문자 전송
+
+POST {{command-app}}/v1/rooms/3cda0287-42b3-4088-bb52-b482d0efb711/messages
+Accept: application/json
+Content-Type: application/json
+
+{
+  "participant": "Steven",
+  "message": "메롱메롱~~"
+}
+
+### 채팅방 leave
+
+DELETE {{command-app}}/v1/rooms/3cda0287-42b3-4088-bb52-b482d0efb711/participants
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Steven"
 }
