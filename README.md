@@ -3,23 +3,51 @@ AXON PRACTICE 2
 ### 목표
 - 멀티 프로젝트 구성
 - Axon TEP에 대한 이해
-- correlation id, causation id에 대한 이해
+
+![](structure.jpeg)
 
 ### 로컬 개발 환경 실행
 ```shell
 docker-compose up -d
 ```
-
+jar 파일 빌드하고 query-app 도커 이미지 빌드
 ```shell
 ./gradlew build
 docker build -t query-app ./query
 ```
-```shell
-docker run --network esdemo3_default --env-file query-app.env -e "SERVER_PORT=8081" -p 8081:8081 query-app
-```
+같은 도커 이미지로 query-app 2개 실행
 ```shell
 docker run --network esdemo3_default --env-file query-app.env -e "SERVER_PORT=8082" -p 8082:8082 query-app
 ```
+```shell
+docker run --network esdemo3_default --env-file query-app.env -e "SERVER_PORT=8083" -p 8083:8083 query-app
+```
+
+### Event Processor 실험 결과
+https://stackoverflow.com/questions/55629264/axon-duplicate-segment-claim-unclaimed-segments-for-multiple-nodes-and-multipl
+
+- TEP 이름 설정 : `@ProcessingGroup`
+
+#### 원하던 결과
+같은 query-app 인스턴스 2개 실행시키면 하나의 이벤트가 로드 밸런싱 되서 둘중 하나의 app 에서만 이벤트 핸들링 되도록 하고 싶다  
+```
+myProcessor의 segment 개수 4개로 설정.
+query-app1 = segment 0, 1 담당  
+query-app2 = segment 2, 3 담당  
+```
+#### 실제 결과
+똑같은 이름의 TEP가 하나 더 뜨면, 나중에 뜬 processor (예 query-app2) 가 모든 segment 처리 담당. (0,1,2,3)  
+다른 이름의 TEP가 있으면 각각 중복으로 이벤트 처리함.
+```
+query-app-local (myProcessor2) = segment 0,1,2,3
+query-app1 = segment 0,1,2,3
+query-app2 = x
+```
+#### TOKEN_ENTRY
+![](token-entry.png)
+
+#### next
+PSEP + ScheduledExecutorService 쓰면 가능...?
 
 
 ### Event Store
@@ -47,11 +75,22 @@ docker run --network esdemo3_default --env-file query-app.env -e "SERVER_PORT=80
    - Tracing Token 초기화해서 처음 이벤트 부터 다시 replay 가능. 스레드가 분리되어 있어 깔끔한 병령 실행도 가능.
    - 더 유연한 시나리오 지원 (decoupling)
    - 2가지 구현체
-     - TEP <- **default**
-     - PSEP <- **recommended**
+     - TEP (Tracking Event Processor) <- **default**
+     - PSEP (Pooled Streaming Event Processor) <- **recommended**
 
 [subscribing](https://docs.axoniq.io/reference-guide/axon-framework/events/event-processors/subscribing)  
 [streaming](https://docs.axoniq.io/reference-guide/axon-framework/events/event-processors/streaming)
 
+#### TEP vs PSEP
 
-https://stackoverflow.com/questions/55629264/axon-duplicate-segment-claim-unclaimed-segments-for-multiple-nodes-and-multipl
+
+1. open event stream
+    - tep : 세그멘트 당 stream 오픈 
+    - psep : stream은 한개만 open. segment worker에게 처리 위임 
+2. segment claim per thread
+    - tep : 스레드당 한개의 세그멘트만 처리 가능. (#segment > #thread 라면 처리 안되는 event가 생길 수 있음.)
+    - psep : maxClaim 설정까지 제한 없음.
+3. thread pool configuration
+    - tep : 서로 다른 인스턴스간 스레드풀 공유 불가
+    - psep : **`ScheduledExecutorService` 쓰면 서로 다른 프로세서 인스턴스간 executor 공유 가능**
+    - https://docs.axoniq.io/reference-guide/axon-framework/deadlines/event-schedulers

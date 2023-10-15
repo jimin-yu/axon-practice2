@@ -4,7 +4,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "NEW-YORK!!"
+  "name": "PARIS!!!"
 }
 
 ### 채팅방 join
