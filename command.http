@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ### 채팅방 join
 
-POST {{command-app}}/v1/rooms/3cda0287-42b3-4088-bb52-b482d0efb711/participants
+POST {{command-app}}/v1/rooms/c882ca75-d8e0-4c3c-952e-ff80798aa5f0/participants
 Accept: application/json
 Content-Type: application/json
 
@@ -19,18 +19,18 @@ Content-Type: application/json
 
 ### 문자 전송
 
-POST {{command-app}}/v1/rooms/3cda0287-42b3-4088-bb52-b482d0efb711/messages
+POST {{command-app}}/v1/rooms/c882ca75-d8e0-4c3c-952e-ff80798aa5f0/messages
 Accept: application/json
 Content-Type: application/json
 
 {
   "participant": "Steven",
-  "message": "메롱메롱~~"
+  "message": "하이루!"
 }
 
 ### 채팅방 leave
 
-DELETE {{command-app}}/v1/rooms/3cda0287-42b3-4088-bb52-b482d0efb711/participants
+DELETE {{command-app}}/v1/rooms/c882ca75-d8e0-4c3c-952e-ff80798aa5f0/participants
 Accept: application/json
 Content-Type: application/json
 

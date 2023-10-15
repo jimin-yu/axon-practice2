@@ -23,7 +23,6 @@ class AxonMongoEventStoreConfig(private val objectMapper: ObjectMapper) {
     fun eventStore(storageEngine: EventStorageEngine, configuration: AxonConfiguration): EmbeddedEventStore {
         return EmbeddedEventStore.builder()
             .storageEngine(storageEngine)
-//            .messageMonitor(configuration.messageMonitor(EventStore::class.java, "paymenteventStore"))
             .build()
     }
 

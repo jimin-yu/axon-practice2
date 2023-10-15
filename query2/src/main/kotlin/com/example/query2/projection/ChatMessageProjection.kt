@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-@ProcessingGroup("group2")
+//@ProcessingGroup("group2")
 class ChatMessageProjection(private val repository: ChatMessageRepository) {
 
     // Read db 업데이트
