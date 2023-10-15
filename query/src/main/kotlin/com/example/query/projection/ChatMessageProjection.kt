@@ -4,6 +4,7 @@ import com.example.events.MessagePostedEvent
 import com.example.query.entity.ChatMessage
 import com.example.query.queries.RoomMessagesQuery
 import com.example.query.repository.ChatMessageRepository
+import org.axonframework.config.ProcessingGroup
 import org.axonframework.eventhandling.EventHandler
 import org.axonframework.eventhandling.Timestamp
 import org.axonframework.queryhandling.QueryHandler
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
+@ProcessingGroup("myProcessor2")
 class ChatMessageProjection(private val repository: ChatMessageRepository) {
 
     // Read db 업데이트

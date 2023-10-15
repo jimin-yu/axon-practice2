@@ -4,7 +4,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "PARIS"
+  "name": "NEW-YORK!!"
 }
 
 ### 채팅방 join
@@ -14,7 +14,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "DANNY"
+  "name": "Steven"
 }
 
 ### 문자 전송

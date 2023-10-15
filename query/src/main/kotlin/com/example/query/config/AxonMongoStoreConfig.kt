@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.mongodb.client.MongoClient
+import org.axonframework.config.ConfigurerModule
+import org.axonframework.eventhandling.TrackingEventProcessorConfiguration
 import org.axonframework.eventsourcing.eventstore.EmbeddedEventStore
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine
 import org.axonframework.extensions.mongo.DefaultMongoTemplate
@@ -18,6 +20,20 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class AxonMongoEventStoreConfig(private val objectMapper: ObjectMapper) {
+
+//    application.yml에 명시
+//    @Bean
+//    fun segmentCountConfigurerModule(): ConfigurerModule {
+//        val tepConfig = TrackingEventProcessorConfiguration
+//            .forParallelProcessing(3)
+//            .andInitialSegmentsCount(3)
+//
+//        return ConfigurerModule { configurer ->
+//            configurer.eventProcessing { processingConfigurer ->
+//                processingConfigurer.registerTrackingEventProcessorConfiguration("myProcessorName") { tepConfig }
+//            }
+//        }
+//    }
 
     @Bean
     fun eventStore(storageEngine: EventStorageEngine, configuration: AxonConfiguration): EmbeddedEventStore {

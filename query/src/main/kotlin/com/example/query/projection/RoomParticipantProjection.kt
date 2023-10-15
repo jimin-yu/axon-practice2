@@ -6,12 +6,14 @@ import com.example.query.entity.RoomParticipant
 import com.example.query.queries.RoomParticipantsQuery
 import com.example.query.repository.RoomParticipantRepository
 import com.example.query.repository.RoomSummaryRepository
+import org.axonframework.config.ProcessingGroup
 import org.axonframework.eventhandling.EventHandler
 import org.axonframework.queryhandling.QueryHandler
 import org.springframework.stereotype.Component
 import javax.transaction.Transactional
 
 @Component
+@ProcessingGroup("myProcessor2")
 class RoomParticipantProjection(
     private val participantRepository: RoomParticipantRepository,
     private val roomSummaryRepository: RoomSummaryRepository

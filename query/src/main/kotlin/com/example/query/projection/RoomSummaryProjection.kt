@@ -10,10 +10,12 @@ import org.axonframework.queryhandling.QueryHandler
 import org.springframework.stereotype.Component
 
 @Component
+@ProcessingGroup("myProcessor2")
 class RoomSummaryProjection(private val repository: RoomSummaryRepository) {
 
     @EventHandler
     fun on(evt: RoomCreatedEvent) {
+        System.out.println("채팅방 생성!!!!!!!!!!!!!!!!!!" + evt.roomId)
         val summary = RoomSummary(evt.roomId, evt.name)
         repository.save(summary)
     }

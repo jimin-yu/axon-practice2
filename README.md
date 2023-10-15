@@ -13,10 +13,12 @@ docker-compose up -d
 ```shell
 ./gradlew build
 docker build -t query-app ./query
-docker run -p 8081:8081 query-app
 ```
 ```shell
-docker run --network esdemo3_default --env-file query-app1.env -p 8081:8081 query-app
+docker run --network esdemo3_default --env-file query-app.env -e "SERVER_PORT=8081" -p 8081:8081 query-app
+```
+```shell
+docker run --network esdemo3_default --env-file query-app.env -e "SERVER_PORT=8082" -p 8082:8082 query-app
 ```
 
 
@@ -46,7 +48,10 @@ docker run --network esdemo3_default --env-file query-app1.env -p 8081:8081 quer
    - 더 유연한 시나리오 지원 (decoupling)
    - 2가지 구현체
      - TEP <- **default**
-     - PSEP
+     - PSEP <- **recommended**
 
 [subscribing](https://docs.axoniq.io/reference-guide/axon-framework/events/event-processors/subscribing)  
 [streaming](https://docs.axoniq.io/reference-guide/axon-framework/events/event-processors/streaming)
+
+
+https://stackoverflow.com/questions/55629264/axon-duplicate-segment-claim-unclaimed-segments-for-multiple-nodes-and-multipl

@@ -24,3 +24,9 @@ axon:
     general: jackson
     messages: jackson
     events: jackson
+  eventhandling:
+    processors:
+      myProcessor2:
+        mode: tracking
+        thread-count: 4
+        initial-segment-count: 4
