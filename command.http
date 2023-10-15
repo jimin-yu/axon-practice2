@@ -4,17 +4,17 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "spain"
+  "name": "PARIS"
 }
 
 ### 채팅방 join
 
-POST {{command-app}}/v1/rooms/c882ca75-d8e0-4c3c-952e-ff80798aa5f0/participants
+POST {{command-app}}/v1/rooms/168bec37-c117-4b9f-9c68-efecbd115e26/participants
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "Steven"
+  "name": "DANNY"
 }
 
 ### 문자 전송

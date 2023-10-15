@@ -11,9 +11,12 @@ docker-compose up -d
 ```
 
 ```shell
-gradle build
+./gradlew build
 docker build -t query-app ./query
-docker run -p 8080:8080 query-app
+docker run -p 8081:8081 query-app
+```
+```shell
+docker run --network esdemo3_default --env-file query-app1.env -p 8081:8081 query-app
 ```
 
 
