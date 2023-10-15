@@ -13,13 +13,14 @@ dependencies {
     }
     implementation("org.axonframework.extensions.mongo:axon-mongo:4.4")
 
-    implementation(kotlin("reflect"))
-    implementation(kotlin("stdlib-jdk8"))
+//    implementation(kotlin("reflect"))
+//    implementation(kotlin("stdlib-jdk8"))
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("mysql:mysql-connector-java:8.0.22")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+//    implementation(project(mapOf("path" to ":query2")))
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

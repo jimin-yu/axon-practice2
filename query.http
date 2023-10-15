@@ -1,2 +1,8 @@
 ### 채팅방 summary 조회
 GET {{query-app}}/v1/rooms
+
+### 채팅방 participants 조회
+GET {{query-app}}/v1/rooms/c882ca75-d8e0-4c3c-952e-ff80798aa5f0/participants
+
+### 채팅방 messages 조회
+GET {{query-app}}/v1/rooms/c882ca75-d8e0-4c3c-952e-ff80798aa5f0/messages
