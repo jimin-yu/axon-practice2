@@ -9,12 +9,12 @@ Content-Type: application/json
 
 ### 채팅방 join
 
-POST {{command-app}}/v1/rooms/168bec37-c117-4b9f-9c68-efecbd115e26/participants
+POST {{command-app}}/v1/rooms/fc3f200d-6300-47fa-b443-866ffc74f60e/participants
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "Steven"
+  "name": "Danny"
 }
 
 ### 문자 전송

@@ -38,6 +38,8 @@ query-app2 = segment 2, 3 담당
 #### 실제 결과
 똑같은 이름의 TEP가 하나 더 뜨면, 나중에 뜬 processor (예 query-app2) 가 모든 segment 처리 담당. (0,1,2,3)  
 다른 이름의 TEP가 있으면 각각 중복으로 이벤트 처리함.
+
+![](duplicate.png)
 ```
 query-app-local (myProcessor2) = segment 0,1,2,3
 query-app1 = segment 0,1,2,3
